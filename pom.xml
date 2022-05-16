@@ -101,6 +101,10 @@
               <mainClass>org.dishevelled.bio.duckdb.Convert</mainClass>
             </program>
             <program>
+              <id>duckdb-create</id>
+              <mainClass>org.dishevelled.bio.duckdb.Create</mainClass>
+            </program>
+            <program>
               <id>duckdb-tools</id>
               <mainClass>org.dishevelled.bio.duckdb.Tools</mainClass>
             </program>

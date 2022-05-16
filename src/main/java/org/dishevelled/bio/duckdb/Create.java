@@ -14,13 +14,13 @@ import picocli.CommandLine.Option;
 import picocli.CommandLine.Parameters;
 
 /**
- * Convert input Parquet file to DuckDB as Parquet file.
+ * Create DuckDB table and write as Parquet file.
  */
-@Command(name = "convert")
-public final class Convert implements Callable<Integer> {
+@Command(name = "create")
+public final class Create implements Callable<Integer> {
 
-    @Option(names = { "-i", "--input-parquet-file" }, required = true)
-    private File inputParquetFile = null;
+    @Option(names = { "-s", "--create-table-sql" }, required = true)
+    private String createTableSql;
 
     @Option(names = { "-o", "--output-parquet-file" }, required = true)
     private File outputParquetFile = null;
@@ -31,11 +31,9 @@ public final class Convert implements Callable<Integer> {
     @Option(names = { "-c", "--codec" })
     private String parquetCodec = "ZSTD";
 
-    // java.sql.SQLException: Binder Error: Table function requires a constant parameter
-    // LINE 1: CREATE TABLE records AS SELECT * from read_parquet(?)
-    //private static final String CREATE_SQL = "CREATE TABLE records AS SELECT * from read_parquet(?)";
-    private static final String CREATE_SQL = "CREATE TABLE records AS SELECT * from read_parquet";
-    private static final String COPY_SQL = "COPY records TO ? (FORMAT 'PARQUET', CODEC ?)";
+    // java.sql.SQLException: Parser Error: syntax error at or near "?"
+    // LINE 1: COPY records TO ? (FORMAT 'PARQUET', CODEC ?)
+    //private static final String COPY_SQL = "COPY records TO ? (FORMAT 'PARQUET', CODEC ?)";
 
     @Override
     public Integer call() throws Exception {
@@ -44,16 +42,9 @@ public final class Convert implements Callable<Integer> {
         Class.forName("org.duckdb.DuckDBDriver");
         try (Connection connection = DriverManager.getConnection(url)) {
 
-            // create in-memory DuckDB table from Parquet file
-            /*
-            try (PreparedStatement create = connection.prepareStatement(CREATE_SQL)) {
-                create.setString(1, inputParquetFile.toString());
-                create.execute();
-            }
-            */
+            // create in-memory DuckDB table
             try (Statement create = connection.createStatement()) {
-                String sql = CREATE_SQL + "('" + inputParquetFile.toString() + "')";
-                create.execute(sql);
+                create.execute(createTableSql);
             }
 
             // copy records from DuckDB table to disk as Parquet file
@@ -78,6 +69,6 @@ public final class Convert implements Callable<Integer> {
      * @param args command line args
      */
     public static void main(final String[] args) {
-        System.exit(new CommandLine(new Convert()).execute(args));
+        System.exit(new CommandLine(new Create()).execute(args));
     }
 }

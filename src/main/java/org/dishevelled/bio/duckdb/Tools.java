@@ -17,6 +17,7 @@ import picocli.CommandLine.ScopeType;
   scope = ScopeType.INHERIT,
   subcommands = {
       Convert.class,
+      Create.class,
       HelpCommand.class,
       GenerateCompletion.class
   },
