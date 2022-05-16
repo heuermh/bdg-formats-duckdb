@@ -1,2 +1,14 @@
 *.class
 *.log
+hs_err_pid*
+*.jar
+*.war
+*.ear
+.idea
+*.iml
+target
+build
+*~
+#*
+*#*
+.DS_Store
