@@ -1,6 +1,48 @@
 # bdg-formats-duckdb
 Convert bdg schema in Apache Parquet format using DuckDB
 
+### Summary
+
+Parquet schema are defined via Avro in [bigdatagenomics/bdg-formats](https://github.com/bigdatagenomics/bdg-formats)
+and written to disk by [bigdatagenomics/adam](https://github.com/bigdatagenomics/adam), e.g.
+```
+$ parquet-tools schema alignments.adam/part-r-00000.gz.parquet
+message org.bdgenomics.formats.avro.Alignment {
+  optional binary referenceName (STRING);
+  optional int64 start;
+  optional int64 originalStart;
+  optional int64 end;
+  optional int32 mappingQuality;
+  optional binary readName (STRING);
+  optional binary sequence (STRING);
+  optional binary qualityScores (STRING);
+  optional binary cigar (STRING);
+  optional binary originalCigar (STRING);
+  optional int32 basesTrimmedFromStart;
+  optional int32 basesTrimmedFromEnd;
+  optional boolean readPaired;
+  optional boolean properPair;
+  optional boolean readMapped;
+  optional boolean mateMapped;
+  optional boolean failedVendorQualityChecks;
+  optional boolean duplicateRead;
+  optional boolean readNegativeStrand;
+  optional boolean mateNegativeStrand;
+  optional boolean primaryAlignment;
+  optional boolean secondaryAlignment;
+  optional boolean supplementaryAlignment;
+  optional binary mismatchingPositions (STRING);
+  optional binary originalQualityScores (STRING);
+  optional binary readGroupId (STRING);
+  optional binary readGroupSampleId (STRING);
+  optional int64 mateAlignmentStart;
+  optional binary mateReferenceName (STRING);
+  optional int64 insertSize;
+  optional int32 readInFragment;
+  optional binary attributes (STRING);
+}
+```
+
 ### Results
 
 ```
