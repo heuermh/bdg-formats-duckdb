@@ -7,10 +7,11 @@ Install
 
  * JDK 1.8 or later, https://openjdk.java.net
  * Apache Maven 3.3.9 or later, https://maven.apache.org
- * Apache Parquet Tools (the old one), https://stackoverflow.com/questions/53306327/installing-parquet-tools
+ * Apache Parquet Tools, https://stackoverflow.com/questions/53306327/installing-parquet-tools
  * Apache Spark 3.2.1 or later, http://spark.apache.org
  * ADAM: Genomic Data System 0.37.0 or later, https://github.com/bigdatagenomics/adam
 
+To build
 ```
 $ mvn package
 $ export PATH=$PATH:`pwd`/target/appassembler/bin
