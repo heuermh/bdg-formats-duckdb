@@ -4,7 +4,6 @@ import java.io.File;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.PreparedStatement;
 import java.sql.Statement;
 
 import java.util.concurrent.Callable;
@@ -31,11 +30,7 @@ public final class Convert implements Callable<Integer> {
     @Option(names = { "-c", "--codec" })
     private String parquetCodec = "ZSTD";
 
-    // java.sql.SQLException: Binder Error: Table function requires a constant parameter
-    // LINE 1: CREATE TABLE records AS SELECT * from read_parquet(?)
-    //private static final String CREATE_SQL = "CREATE TABLE records AS SELECT * from read_parquet(?)";
     private static final String CREATE_SQL = "CREATE TABLE records AS SELECT * from read_parquet";
-    private static final String COPY_SQL = "COPY records TO ? (FORMAT 'PARQUET', CODEC ?)";
 
     @Override
     public Integer call() throws Exception {
@@ -45,25 +40,12 @@ public final class Convert implements Callable<Integer> {
         try (Connection connection = DriverManager.getConnection(url)) {
 
             // create in-memory DuckDB table from Parquet file
-            /*
-            try (PreparedStatement create = connection.prepareStatement(CREATE_SQL)) {
-                create.setString(1, inputParquetFile.toString());
-                create.execute();
-            }
-            */
             try (Statement create = connection.createStatement()) {
                 String sql = CREATE_SQL + "('" + inputParquetFile.toString() + "')";
                 create.execute(sql);
             }
 
             // copy records from DuckDB table to disk as Parquet file
-            /*
-            try (PreparedStatement copy = connection.prepareStatement(COPY_SQL)) {
-                copy.setString(1, outputParquetFile.toString());
-                copy.setString(2, parquetCodec);
-                copy.execute();
-            }
-            */
             try (Statement copy = connection.createStatement()) {
                 String sql = "COPY records TO '" + outputParquetFile.toString() + "' (FORMAT 'PARQUET', CODEC '" + parquetCodec + "')";
                 copy.execute(sql);
