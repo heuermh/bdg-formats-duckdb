@@ -1,6 +1,22 @@
 # bdg-formats-duckdb
 Convert bdg schema in Apache Parquet format using DuckDB
 
+### Hacking
+
+Install
+
+ * JDK 1.8 or later, https://openjdk.java.net
+ * Apache Maven 3.3.9 or later, https://maven.apache.org
+ * Apache Parquet Tools (the old one), https://stackoverflow.com/questions/53306327/installing-parquet-tools
+ * Apache Spark 3.2.1 or later, http://spark.apache.org
+ * ADAM: Genomic Data System 0.37.0 or later, https://github.com/bigdatagenomics/adam
+
+```
+$ mvn package
+$ export PATH=$PATH:`pwd`/target/appassembler/bin
+$ duckdb-tools --help
+```
+
 ### Summary
 
 Parquet schema are defined via Avro in [bigdatagenomics/bdg-formats](https://github.com/bigdatagenomics/bdg-formats)
