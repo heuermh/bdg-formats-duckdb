@@ -29,6 +29,7 @@
     <url>https://github.com/heuermh/bdg-formats-duckdb/issues</url>
   </issueManagement>
   <properties>
+    <commons-dbutils.version>1.7</commons-dbutils.version>
     <duckdb.version>0.3.3</duckdb.version>
     <jdk.version>1.8</jdk.version>
     <kryo-serializers.version>0.45</kryo-serializers.version>
@@ -38,6 +39,11 @@
   </properties>
   <dependencyManagement>
     <dependencies>
+      <dependency>
+        <groupId>commons-dbutils</groupId>
+        <artifactId>commons-dbutils</artifactId>
+        <version>${commons-dbutils.version}</version>
+      </dependency>
       <dependency>
         <groupId>org.duckdb</groupId>
         <artifactId>duckdb_jdbc</artifactId>
@@ -51,6 +57,11 @@
     </dependencies>
   </dependencyManagement>
   <dependencies>
+    <dependency>
+      <groupId>commons-dbutils</groupId>
+      <artifactId>commons-dbutils</artifactId>
+      <scope>compile</scope>
+    </dependency>
     <dependency>
       <groupId>org.duckdb</groupId>
       <artifactId>duckdb_jdbc</artifactId>
@@ -103,6 +114,18 @@
             <program>
               <id>duckdb-create</id>
               <mainClass>org.dishevelled.bio.duckdb.Create</mainClass>
+            </program>
+            <program>
+              <id>duckdb-describe</id>
+              <mainClass>org.dishevelled.bio.duckdb.Describe</mainClass>
+            </program>
+            <program>
+              <id>duckdb-meta</id>
+              <mainClass>org.dishevelled.bio.duckdb.Meta</mainClass>
+            </program>
+            <program>
+              <id>duckdb-schema</id>
+              <mainClass>org.dishevelled.bio.duckdb.Schema</mainClass>
             </program>
             <program>
               <id>duckdb-tools</id>

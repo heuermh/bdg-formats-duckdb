@@ -18,6 +18,9 @@ import picocli.CommandLine.ScopeType;
   subcommands = {
       Convert.class,
       Create.class,
+      Describe.class,
+      Meta.class,
+      Schema.class,
       HelpCommand.class,
       GenerateCompletion.class
   },
