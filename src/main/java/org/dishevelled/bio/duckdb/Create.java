@@ -30,6 +30,8 @@ public final class Create implements Callable<Integer> {
     @Option(names = { "-c", "--codec" })
     private String parquetCodec = "ZSTD";
 
+    private static final String COPY_SQL = "COPY records TO '%s' (FORMAT 'PARQUET', CODEC '%s')";
+
     @Override
     public Integer call() throws Exception {
 
@@ -44,7 +46,7 @@ public final class Create implements Callable<Integer> {
 
             // copy records from DuckDB table to disk as Parquet file
             try (Statement copy = connection.createStatement()) {
-                String sql = "COPY records TO '" + outputParquetFile.toString() + "' (FORMAT 'PARQUET', CODEC '" + parquetCodec + "')";
+                String sql = String.format(COPY_SQL, outputParquetFile.toString(), parquetCodec);
                 copy.execute(sql);
             }
         }

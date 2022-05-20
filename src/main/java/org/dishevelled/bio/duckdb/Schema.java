@@ -13,10 +13,6 @@ import java.util.Map;
 
 import java.util.concurrent.Callable;
 
-import org.apache.commons.dbutils.QueryRunner;
-
-import org.apache.commons.dbutils.handlers.MapListHandler;
-
 import picocli.CommandLine.Command;
 import picocli.CommandLine.Option;
 import picocli.CommandLine.Parameters;
