@@ -9,13 +9,30 @@ Install
  * Apache Maven 3.3.9 or later, https://maven.apache.org
  * Apache Parquet Tools, https://stackoverflow.com/questions/53306327/installing-parquet-tools
  * Apache Spark 3.2.1 or later, http://spark.apache.org
- * ADAM: Genomic Data System 0.37.0 or later, https://github.com/bigdatagenomics/adam
+ * ADAM: Genomic Data System 1.0 or later, https://github.com/bigdatagenomics/adam
 
 To build
 ```
 $ mvn package
+
 $ export PATH=$PATH:`pwd`/target/appassembler/bin
+
 $ duckdb-tools --help
+USAGE
+  duckdb-tools [-hV] [COMMAND]
+
+OPTIONS
+  -h, --help      Show this help message and exit.
+  -V, --version   Print version information and exit.
+
+COMMANDS
+  convert              Convert input Parquet file to DuckDB as Parquet file.
+  create               Create DuckDB table and write as Parquet file.
+  describe             Describe Parquet file columns as loaded by DuckDB.
+  meta                 Query the metadata of a Parquet file as loaded by DuckDB.
+  schema               Query the internal schema of a Parquet file as loaded by DuckDB.
+  help                 Display help information about the specified command.
+  generate-completion  Generate bash/zsh completion script for duckdb-tools.
 ```
 
 ### Summary
