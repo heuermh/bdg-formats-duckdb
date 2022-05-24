@@ -19,6 +19,7 @@ import picocli.CommandLine.ScopeType;
       Convert.class,
       Create.class,
       Describe.class,
+      Head.class,
       Meta.class,
       Schema.class,
       HelpCommand.class,
