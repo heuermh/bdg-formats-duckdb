@@ -29,6 +29,7 @@ COMMANDS
   convert              Convert input Parquet file to DuckDB as Parquet file.
   create               Create DuckDB table and write as Parquet file.
   describe             Describe Parquet file columns as loaded by DuckDB.
+  head                 Write the first n records from a Parquet file in JSON format.
   meta                 Query the metadata of a Parquet file as loaded by DuckDB.
   schema               Query the internal schema of a Parquet file as loaded by DuckDB.
   help                 Display help information about the specified command.
